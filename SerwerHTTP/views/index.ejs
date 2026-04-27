@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Nowa rezerwacja</title>
+    </head>
+
+    <body>
+        <h1>Zarezerwuj Sprzęt</h1>
+
+        <form action="/rezerwacja" method="POST">
+
+            <label>Sprzęt:</label>
+            <select name="gearId" value="<%= old?.gearId || '' %>">
+                <% gear.forEach(g => { %>
+                    <option value="<%= g.id %>">
+                        <%= g.name %> (<%= g.pricePerHour %>PLN/h)
+                    </option>
+                <% }) %>
+            </select>
+
+            <br><br>
+
+            <label>Data rezerwacji:</label>
+            <input type="date" name="date" value="<%= old?.date || '' %>" required>
+
+            <br><br>
+
+            <label>Godzina rezerwacji:</label>
+            <input type="number" name="hour" min="0" max="23" value="<%= old?.hour || '' %>" required>
+
+            <br><br>
+
+            <label>Liczba godzin:</label>
+            <input type="number" name="duration" min="1" value="<%= old?.duration || '' %>" required>
+
+            <br><br>
+
+            <label>Sztuki sprzętu:</label>
+            <input type="number" name="amount" min="1" value="<%= old?.amount || '' %>" required>
+
+            <br><br>
+
+            <label>Email:</label>
+            <input type="email" name="email" value="<%= old?.email || '' %>" required>
+            
+            <br><br>
+
+            <% if (errors && errors.length > 0) { %>
+                <% errors.forEach(err => { %>
+                    <label style="color: red;"><%= err %></label>
+                    <br><br>
+                <% }) %>
+            <% } %>
+
+            <button type="submit">Rezerwuj</button>
+        </form>
+
+        <h2>Szeczgóły Rezerwacji</h2>
+        <form action="/rezerwacja" method="GET">
+            <label>Numer Rezerwacji:</label>
+            <input type="text" name="id" required>
+            <button type="submit">Sprawdź</button>
+        </form>
+
+        <h2>Odwołaj Rezerwację</h2>
+        <form action="/odwolaj_rezerwacje" method="POST">
+            <label>Numer Rezerwacji:</label>
+            <input type="text" name="id" required>
+            <button type="submit">Odwołaj</button>
+        </form>
+        <hr>
+    </body>
+</html>

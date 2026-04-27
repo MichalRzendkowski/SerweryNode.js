@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        <% if (newReservation) { %>
+            Utworzono Rezerwację
+        <% } else { %>
+            Anulowano Rezerwację
+        <% } %>
+    </title>
+</head>
+
+<body>
+    <h1>
+        <% if (newReservation) { %>
+            Utworzono Rezerwację
+        <% } else { %>
+            Anulowano Rezerwację
+        <% } %>
+    </h1>
+
+    <p>numer rezerwacji: <%= id %></p>
+
+    <% if (newReservation) { %>
+        <p>sprzęt: <%= name %></p>
+        <p>sztuk: <%= reservation.amount %></p>
+        <p>cena: <%= price %> PLN</p>
+        <p>data: <%= reservation.date %></p>
+        <p>godzina: <%= reservation.hour %>:00</p>
+    <% } %>
+
+    <a href="/">Powrót</a>
+</body>
+</html>
